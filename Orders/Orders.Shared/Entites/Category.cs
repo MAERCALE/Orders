@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using Orders.Shared.Interfaces;
 
 namespace Orders.Shared.Entites
 {
-    public class Category
+    public class Category : IEntityWithName
     {
         public int Id { get; set; }
 

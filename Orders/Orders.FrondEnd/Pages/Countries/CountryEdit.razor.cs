@@ -1,14 +1,16 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Orders.FrondEnd.Repositories;
+using Orders.FrondEnd.Shared;
 using Orders.Shared.Entites;
+using Orders.Shared.Interfaces;
 
 namespace Orders.FrondEnd.Pages.Countries
 {
     public partial class CountryEdit
     {
         private Country? country;
-        private CountryForm? countryForm;
+        private FormWithName<Country>? countryForm;
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;

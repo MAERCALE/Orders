@@ -2,14 +2,16 @@
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Orders.FrondEnd.Repositories;
+using Orders.FrondEnd.Shared;
 using Orders.Shared.Entites;
+using Orders.Shared.Interfaces;
 
 namespace Orders.FrondEnd.Pages.Countries
 {
     public partial class CountryCreate
     {
         private Country country = new();
-        private CountryForm? countryform;
+        private FormWithName<Country>? countryForm;
 
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
@@ -18,13 +20,12 @@ namespace Orders.FrondEnd.Pages.Countries
         private async Task CreateAsync()
         {
             var responseHttp = await Repository.PostAsync("/api/countries/", country);
-            if (responseHttp.Error) 
-            { 
-             var message = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error",message, SweetAlertIcon.Error);
+            if (responseHttp.Error)
+            {
+                var message = await responseHttp.GetErrorMessageAsync();
+                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
                 return;
             }
-
             Return();
             var toast = SweetAlertService.Mixin(new SweetAlertOptions
             {
@@ -34,12 +35,11 @@ namespace Orders.FrondEnd.Pages.Countries
                 Timer = 3000
             });
             await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro creado con éxito.");
-
         }
 
         private void Return()
         {
-            countryform!.FormPostedSuccessfully = true;
+            countryForm!.FormPostedSuccessfully = true;
             NavigationManager.NavigateTo("/countries");
         }
     }

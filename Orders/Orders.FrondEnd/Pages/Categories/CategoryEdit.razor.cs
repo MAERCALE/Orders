@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Orders.FrondEnd.Pages.Countries;
 using Orders.FrondEnd.Repositories;
+using Orders.FrondEnd.Shared;
 using Orders.Shared.Entites;
 
 namespace Orders.FrondEnd.Pages.Categories
@@ -9,7 +10,7 @@ namespace Orders.FrondEnd.Pages.Categories
     public partial class CategoryEdit
     {
         private Category? category;
-        private CategoryForm? categoryForm;
+        private FormWithName<Category>? categoryForm;
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;

@@ -17,7 +17,7 @@ namespace Orders.Backend.Repositories.Implementations
             _entity = context.Set<T>();
         }
 
-        public async Task<ActionResponse<T>> AddAsync(T entity)
+        public virtual async Task<ActionResponse<T>> AddAsync(T entity)
         {
             _context.Add(entity);
             try
@@ -39,7 +39,7 @@ namespace Orders.Backend.Repositories.Implementations
             }
         }
 
-        public async Task<ActionResponse<T>> DeleteAsync(int id)
+        public virtual async Task<ActionResponse<T>> DeleteAsync(int id)
         {
             var row = await _entity.FindAsync(id);
             if (row is null) 
@@ -71,7 +71,7 @@ namespace Orders.Backend.Repositories.Implementations
             }
         }
 
-        public async Task<ActionResponse<T>> GetAsync(int id)
+        public virtual async Task<ActionResponse<T>> GetAsync(int id)
         {
             var row = await _entity.FindAsync(id);
             if (row != null)
@@ -90,7 +90,7 @@ namespace Orders.Backend.Repositories.Implementations
 
         }
 
-        public async Task<ActionResponse<IEnumerable<T>>> GetAsync()
+        public virtual async Task<ActionResponse<IEnumerable<T>>> GetAsync()
         {
             return new ActionResponse<IEnumerable<T>>
             {
@@ -99,7 +99,7 @@ namespace Orders.Backend.Repositories.Implementations
             }; 
         }
 
-        public async Task<ActionResponse<T>> UpdateAsync(T entity)
+        public virtual async Task<ActionResponse<T>> UpdateAsync(T entity)
         {
             _context.Update(entity);
             try

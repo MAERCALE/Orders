@@ -9,6 +9,7 @@
 			<thead>
 				<tr>
 					<th>País</th>
+					<th>Departamentos</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -16,12 +17,12 @@
 				@foreach (var country in Countries!)
 				{
 					<tr>
+						<td> @country.Name</td>
+						<td> @country.StatesNumber </td>
 						<td>
-							@country.Name
-						</td>
-						<td>
-							<a href="/countries/edit/@country.Id" class=" btn btn-warning">Editar</a>
-							<buton @onclick=@(()=>DeleteAsync(country)) class ="btn btn-danger">Borrar</buton>
+							<a href="/countries/edit/@country.Id" class=" btn btn-warning btn-sm">Editar</a>
+							<a class="btn btn-info btn-sm" href="/countries/details/@country.Id">Detalles</a>
+							<buton class="btn btn-danger btn-sm" @onclick=@(()=>DeleteAsync(country))>Borrar</buton>
 						</td>
 					</tr>
 				}

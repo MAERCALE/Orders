@@ -10,6 +10,6 @@ namespace Orders.Backend.Controllers
     {
         public CategoriesController(IGenericUnitOfWork<Category> unitOfWork) : base(unitOfWork)
         {
-        }
+        } 
     }
 }

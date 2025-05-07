@@ -10,7 +10,7 @@ namespace Orders.FrondEnd.Pages.Categories
     public partial class CategoryEdit
     {
         private Category? category;
-        private FormWithName<Category>? categoryForm;
+        private readonly FormWithName<Category>? categoryForm;
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;

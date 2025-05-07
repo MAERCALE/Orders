@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Data;
+using Orders.Backend.Helpers;
 using Orders.Backend.Repositories.Interfaces;
+using Orders.Shared.DTOs;
 using Orders.Shared.Entites;
 using Orders.Shared.Responses;
 
@@ -15,6 +17,33 @@ namespace Orders.Backend.Repositories.Implementations
             _context = context;
         }
 
+        public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync()
+        {
+            var countries = await _context.Countries
+                 .OrderBy(x => x.Name)
+                 .Include(s => s.States)
+                 .ToListAsync();
+            return new ActionResponse<IEnumerable<Country>>
+            {
+                WasSuccess = true,
+                Result = countries
+            };
+        }
+        public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination)
+        {
+            var queryable = _context.Countries
+                .Include(c => c.States)
+                .AsQueryable();
+
+            return new ActionResponse<IEnumerable<Country>>
+            {
+                WasSuccess = true,
+                Result = await queryable
+                    .OrderBy(x => x.Name)
+                    .Paginate(pagination)
+                    .ToListAsync()
+            };
+        }
         public override async Task<ActionResponse<Country>> GetAsync(int id)
         {
             var country = await _context.Countries
@@ -36,20 +65,10 @@ namespace Orders.Backend.Repositories.Implementations
                 WasSuccess = true,
                 Result = country
             };
-
         }
 
-        public override async  Task<ActionResponse<IEnumerable<Country>>> GetAsync()
-        {
-            var countries = await _context.Countries
-                 .Include(c => c.States)
-                 .ToListAsync();
-            return new ActionResponse<IEnumerable<Country>>
-            {
-                WasSuccess = true,
-                Result = countries
-            };
+       
 
-        }
+        
     }
 }

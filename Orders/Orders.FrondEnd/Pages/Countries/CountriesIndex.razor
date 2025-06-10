@@ -1,15 +1,24 @@
 ﻿@page "/countries"
 <h3>Paises</h3>
 <div>
-	<a class=" btn btn-primary"href= "/countries/create">Nuevo País</a>
+	<a class="btn btn-primary " href="/countries/create">Nuevo País</a>
+	<div>    </div>
 </div>
 <GenericList MyList="Countries"> 
 	<Body>
+		<table class="table">
+		</table>
+
+		<Pagination CurrentPage="currentPage"
+					TotalPages="totalPages"
+					SelectedPage="SelectedPageAsync" />
+
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>País</th>
-					<th>Departamentos</th>
+					<th style="width:210px">Departamentos</th>
+					<th style="width:210px"></th>
 					<th></th>
 				</tr>
 			</thead>
@@ -28,6 +37,7 @@
 				}
 			</tbody>
 		</table>
+				
 	</Body>
 
 </GenericList>

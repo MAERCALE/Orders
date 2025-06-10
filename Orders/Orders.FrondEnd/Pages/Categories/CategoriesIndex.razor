@@ -5,11 +5,20 @@
 </div>
 <GenericList MyList="Categories">
 	<Body>
+		
+	<table class="table">
+
+	</table>
+	
+		<Pagination CurrentPage="currentPage"
+		TotalPages="totalPages"
+		SelectedPage="SelectedPageAsync" />
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Categoria</th>
-					<th></th>
+					<th style="width:140px"></th>
 				</tr>	
 			</thead>
 			<tbody>
@@ -20,13 +29,14 @@
 							@category.Name
 						</td>
 						<td>
-							<a href="/Categories/edit/@category.Id" class=" btn btn-warning">Editar</a>
-							<buton @onclick=@(()=>DeleteAsync(category)) class="btn btn-danger">Borrar</buton>
+							<a href="/Categories/edit/@category.Id" class=" btn btn-warning btn-sm">Editar</a>
+							<buton @onclick=@(()=>DeleteAsync(category)) class="btn btn-danger btn-sm">Borrar</buton>
 						</td>
 					</tr>
 				}
 			</tbody>
 		</table>
+		
 	</Body>
 
 </GenericList>

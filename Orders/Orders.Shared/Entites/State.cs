@@ -17,9 +17,8 @@ namespace Orders.Shared.Entites
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public string Name { get; set; } = null!;
         public int CountryId { get; set; }
-        public Country? Country { get; set; }
+        public Country? Cuntry { get; set; }
         public ICollection<City>? Cities { get; set; } //Establece la relación 1-* con City
-
         [Display(Name = "Distritos")]
         public int CitiesNumber => Cities == null || Cities.Count == 0 ? 0 : Cities.Count; //obtieene el número de departamentos existentes
     }

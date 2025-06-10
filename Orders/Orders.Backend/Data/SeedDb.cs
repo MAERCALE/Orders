@@ -95,6 +95,16 @@ namespace Orders.Backend.Data
                 _context.Categories.Add(new Category { Name = "Tecnología" });
                 _context.Categories.Add(new Category { Name = "Niños" });
                 _context.Categories.Add(new Category { Name = "Calzado" });
+                _context.Categories.Add(new Category { Name = "Cosmeticos" });
+                _context.Categories.Add(new Category { Name = "Autos" });
+                _context.Categories.Add(new Category { Name = "Bellesa" });
+                _context.Categories.Add(new Category { Name = "Adultos" });
+                _context.Categories.Add(new Category { Name = "Nutrición" });
+                _context.Categories.Add(new Category { Name = "Lenceria" });
+                _context.Categories.Add(new Category { Name = "Gamer" });
+                _context.Categories.Add(new Category { Name = "Ferreteria" });
+                _context.Categories.Add(new Category { Name = "Cómputo" });
+                _context.Categories.Add(new Category { Name = "Línea Blanca" });
             }
             await _context.SaveChangesAsync();
         }

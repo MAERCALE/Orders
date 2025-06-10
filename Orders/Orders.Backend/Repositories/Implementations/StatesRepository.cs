@@ -21,7 +21,6 @@ namespace Orders.Backend.Repositories.Implementations
         {
             var states = await _context.States
              .OrderBy(x => x.Name)
-             .Include(s => s.Cities)
              .ToListAsync();
             return new ActionResponse<IEnumerable<State>>
             {
@@ -55,7 +54,7 @@ namespace Orders.Backend.Repositories.Implementations
         {
             var queryable = _context.States
                 .Include(x => x.Cities)
-                .Where(x => x.Country!.Id == pagination.Id)
+                .Where(x => x.CountryId! == pagination.Id)
                 .AsQueryable();
 
             return new ActionResponse<IEnumerable<State>>
@@ -71,7 +70,7 @@ namespace Orders.Backend.Repositories.Implementations
         public async override Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination)
         {
             var queryable = _context.States
-                .Where(x => x.Country!.Id == pagination.Id)
+                .Where(x => x.CountryId! == pagination.Id)
                 .AsQueryable();
 
             double count = await queryable.CountAsync();

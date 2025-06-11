@@ -1,4 +1,5 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders.FrondEnd.Pages.Countries;
 using Orders.FrondEnd.Repositories;
@@ -7,10 +8,11 @@ using Orders.Shared.Entites;
 
 namespace Orders.FrondEnd.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public partial class CategoryEdit
     {
         private Category? category;
-        private readonly FormWithName<Category>? categoryForm;
+        private FormWithName<Category>?categoryForm;
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;

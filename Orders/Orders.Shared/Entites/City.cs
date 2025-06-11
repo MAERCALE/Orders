@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Orders.Shared.Entities;
 using Orders.Shared.Interfaces;
 
 namespace Orders.Shared.Entites
@@ -18,6 +19,8 @@ namespace Orders.Shared.Entites
         public string Name { get; set; } = null!;
         public int StateId { get; set; }
         public State? State { get; set; }
+
+        public ICollection<User>? Users { get; set; }
 
     }
 }

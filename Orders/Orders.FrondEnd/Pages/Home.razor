@@ -1,7 +1,12 @@
 ﻿@page "/"
+<PageTitle>Inicio</PageTitle>
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <p>Estas autenticado y autorizado, @context.User.Identity?.Name</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>Estas autenticado como Anonimo</p>
+    </NotAuthorized>
+   </AuthorizeView>
+   <h3> Mecl</h3>
 
-<PageTitle>Home</PageTitle>
-
-<h1>Bienvenido al Sistema de Compras en Línea!</h1>
-
-Mecl.

@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders.FrondEnd.Repositories;
 using Orders.FrondEnd.Shared;
@@ -8,6 +9,7 @@ using Orders.Shared.Interfaces;
 
 namespace Orders.FrondEnd.Pages.Countries
 {
+    [Authorize(Roles = "Admin")]
     public partial class CountryCreate
     {
         private Country country = new();

@@ -27,8 +27,8 @@ namespace Orders.Backend.Repositories.Implementations
                 WasSuccess = true,
                 Result = states
             };
-
         }
+
         public override async Task<ActionResponse<State>> GetAsync(int id)
         {
             var state = await _context.States
@@ -50,18 +50,18 @@ namespace Orders.Backend.Repositories.Implementations
                 Result = state
             };
         }
+
         public override async Task<ActionResponse<IEnumerable<State>>> GetAsync(PaginationDTO pagination)
         {
             var queryable = _context.States
                 .Include(x => x.Cities)
                 .Where(x => x.CountryId! == pagination.Id)
                 .AsQueryable();
-            
+
             if (!string.IsNullOrWhiteSpace(pagination.Filter))
             {
                 queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
             }
-
 
             return new ActionResponse<IEnumerable<State>>
             {
@@ -73,17 +73,24 @@ namespace Orders.Backend.Repositories.Implementations
             };
         }
 
-        public async override Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination)
+        public async Task<IEnumerable<State>> GetComboAsync(int countryId)
+        {
+            return await _context.States
+           .Where(s => s.CountryId == countryId)
+           .OrderBy(s => s.Name)
+           .ToListAsync();
+        }
+
+        public override async Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination)
         {
             var queryable = _context.States
                 .Where(x => x.CountryId! == pagination.Id)
                 .AsQueryable();
-            
+
             if (!string.IsNullOrWhiteSpace(pagination.Filter))
             {
                 queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
             }
-
 
             double count = await queryable.CountAsync();
             int totalPages = (int)Math.Ceiling(count / pagination.RecordsNumber);
@@ -93,8 +100,5 @@ namespace Orders.Backend.Repositories.Implementations
                 Result = totalPages
             };
         }
-
     }
 }
-      
- 
